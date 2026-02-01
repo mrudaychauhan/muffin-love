@@ -6,155 +6,165 @@
 <title>For Muffin ❤️</title>
 
 <style>
-    body {
-        margin: 0;
-        height: 100vh;
-        font-family: 'Comic Sans MS', cursive;
-        background: linear-gradient(135deg, #ffd6e8, #e6ccff);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-    }
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg,#ffd6e8,#e6ccff);
+    font-family: 'Comic Sans MS', cursive;
+    overflow: hidden;
+}
 
-    .box {
-        text-align: center;
-        background: white;
-        padding: 30px;
-        border-radius: 25px;
-        width: 90%;
-        max-width: 400px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
+.screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 30px;
+}
 
-    h1 {
-        color: #ff4d88;
-    }
+.active { display: flex; }
 
-    .buttons {
-        margin-top: 30px;
-        position: relative;
-        height: 200px;
-    }
+.box {
+    background: white;
+    padding: 30px;
+    border-radius: 25px;
+    max-width: 400px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.2);
+}
 
-    button {
-        padding: 15px 30px;
-        border-radius: 30px;
-        border: none;
-        font-size: 18px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
+button {
+    margin-top: 20px;
+    padding: 14px 28px;
+    border-radius: 30px;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    background: #ff4d88;
+    color: white;
+}
 
-    #yesBtn {
-        background: #ff4d88;
-        color: white;
-    }
+.heart {
+    position: absolute;
+    font-size: 24px;
+    animation: float 2s linear forwards;
+}
 
-    #noBtn {
-        background: #ccc;
-        position: absolute;
-    }
+@keyframes float {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-100px); opacity: 0; }
+}
 
-    .final {
-        display: none;
-        font-size: 18px;
-        color: #ff4d88;
-    }
+#noBtn {
+    background: #ccc;
+    color: black;
+    position: absolute;
+}
 </style>
 </head>
 
 <body>
 
-<div class="box" id="mainBox">
-    <h1>Muffin 💕</h1>
-    <p>Will you be the mother of my children? 💍❤️</p>
-
-    <div class="buttons">
-        <button id="yesBtn">YES 💖</button>
-        <button id="noBtn">NO 😅</button>
+<!-- SCREEN 1 -->
+<div class="screen active" id="s1">
+    <div class="box">
+        <h2>Hey Muffin 💕</h2>
+        <p>I made something just for you…</p>
+        <button onclick="next(2)">Start ❤️</button>
     </div>
 </div>
 
-<div class="box final" id="finalBox">
-    <h1>My Muffin ❤️</h1>
-    <p>
-        From today until forever,<br><br>
-        I promise to love you on your good days,<br>
-        hold you on your bad days,<br>
-        laugh with you in silly moments,<br>
-        and stand by you no matter what.<br><br>
-
-        You are not just my love —<br>
-        you are my home, my peace, my future.<br><br>
-
-        This is only the beginning of our forever 💕
-    </p>
+<!-- SCREEN 2 -->
+<div class="screen" id="s2">
+    <div class="box">
+        <h2 id="typing"></h2>
+        <button onclick="next(3)">Continue 💗</button>
+    </div>
 </div>
 
-<!-- Cute Sounds -->
-<audio id="moveSound" src="https://assets.mixkit.co/sfx/preview/mixkit-game-click-1114.mp3"></audio>
-<audio id="yesSound" src="https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkle-902.mp3"></audio>
+<!-- SCREEN 3 -->
+<div class="screen" id="s3">
+    <div class="box">
+        <h2>Tap anywhere 💖</h2>
+        <p>Create some love magic ✨</p>
+        <button onclick="next(4)">Next 💕</button>
+    </div>
+</div>
+
+<!-- SCREEN 4 -->
+<div class="screen" id="s4">
+    <div class="box">
+        <h2>One important question… 💍</h2>
+        <p>Will you be the mother of my children?</p>
+        <div style="height:150px; position:relative;">
+            <button onclick="yes()">YES 💖</button>
+            <button id="noBtn">NO 😅</button>
+        </div>
+    </div>
+</div>
+
+<!-- SCREEN 5 -->
+<div class="screen" id="s5">
+    <div class="box">
+        <h2>My Muffin ❤️</h2>
+        <p>
+        You are my today,<br>
+        my tomorrow,<br>
+        and my forever.<br><br>
+        Thank you for choosing me 💕
+        </p>
+    </div>
+</div>
 
 <script>
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const moveSound = document.getElementById("moveSound");
-const yesSound = document.getElementById("yesSound");
+let text = "Every moment with you feels like magic ✨";
+let i = 0;
 
-let attempts = 0;
+function next(n){
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById('s'+n).classList.add('active');
 
-const messages = [
-    "Are you sure Muffin? 🥺",
-    "Think again 😭",
-    "My heart is shaking 💔",
-    "Heyyy don’t do that 😆",
-    "Okay okay… just click YES ❤️"
-];
-
-// move button anywhere
-function moveButton() {
-    attempts++;
-    moveSound.play();
-
-    const box = document.querySelector(".buttons");
-    const maxX = box.clientWidth - noBtn.offsetWidth;
-    const maxY = box.clientHeight - noBtn.offsetHeight;
-
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-
-    if (attempts <= messages.length) {
-        noBtn.innerText = messages[attempts - 1];
-    }
-
-    // shrink slowly
-    noBtn.style.transform = `scale(${1 - attempts * 0.08})`;
-
-    // disappear
-    if (attempts >= 6) {
-        noBtn.style.display = "none";
+    if(n===2){
+        const el = document.getElementById("typing");
+        el.innerHTML = "";
+        i=0;
+        let t = setInterval(()=>{
+            el.innerHTML += text[i];
+            i++;
+            if(i>=text.length) clearInterval(t);
+        },60);
     }
 }
 
-// desktop
-noBtn.addEventListener("mouseenter", moveButton);
+document.addEventListener("click", e=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.style.left=e.clientX+"px";
+    h.style.top=e.clientY+"px";
+    h.innerHTML="❤️";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),2000);
+});
 
-// mobile
-noBtn.addEventListener("touchstart", function(e){
+const noBtn=document.getElementById("noBtn");
+noBtn.addEventListener("mouseenter", move);
+noBtn.addEventListener("touchstart", e=>{
     e.preventDefault();
-    moveButton();
+    move();
 });
 
-// YES button
-yesBtn.addEventListener("click", () => {
-    yesSound.play();
-    document.getElementById("mainBox").style.display = "none";
-    document.getElementById("finalBox").style.display = "block";
-});
+function move(){
+    const x=Math.random()*200;
+    const y=Math.random()*100;
+    noBtn.style.left=x+"px";
+    noBtn.style.top=y+"px";
+}
+
+function yes(){
+    next(5);
+}
 </script>
 
 </body>
