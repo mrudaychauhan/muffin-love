@@ -1,171 +1,1096 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Muffin ❤️</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Muffin ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rose: #f8b4c4;
+      --rose-deep: #f093b0;
+      --lavender: #e4c5f7;
+      --lavender-deep: #d4a5f0;
+      --peach: #ffd9c9;
+      --cream: #fff5f7;
+      --shadow-soft: 0 8px 32px rgba(240, 147, 176, 0.25);
+      --shadow-glow: 0 0 40px rgba(248, 180, 196, 0.5);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
 
-<style>
-body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg,#ffd6e8,#e6ccff);
-    font-family: 'Comic Sans MS', cursive;
-    overflow: hidden;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-.screen {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 30px;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.active { display: flex; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(160deg, var(--cream) 0%, var(--lavender) 40%, var(--rose) 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #5c4a5a;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-.box {
-    background: white;
-    padding: 30px;
-    border-radius: 25px;
-    max-width: 400px;
-    box-shadow: 0 20px 40px rgba(0,0,0,.2);
-}
+    .chapter {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1.5rem;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s var(--ease-soft), transform 1s var(--ease-soft);
+    }
 
-button {
-    margin-top: 20px;
-    padding: 14px 28px;
-    border-radius: 30px;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    background: #ff4d88;
-    color: white;
-}
+    .chapter.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-.heart {
-    position: absolute;
-    font-size: 24px;
-    animation: float 2s linear forwards;
-}
+    .chapter.hidden {
+      display: none !important;
+    }
 
-@keyframes float {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-100px); opacity: 0; }
-}
+    /* ---------- Chapter 1: The Beginning ---------- */
+    #ch1 {
+      background: linear-gradient(180deg, var(--cream) 0%, var(--peach) 50%, var(--rose) 100%);
+    }
 
-#noBtn {
-    background: #ccc;
-    color: black;
-    position: absolute;
-}
-</style>
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      font-size: clamp(16px, 4vw, 28px);
+      opacity: 0.6;
+      animation: float-particle 8s var(--ease-soft) infinite;
+    }
+
+    @keyframes float-particle {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.5;
+      }
+      25% {
+        transform: translate(10px, -30px) rotate(10deg);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translate(-15px, -60px) rotate(-5deg);
+        opacity: 0.6;
+      }
+      75% {
+        transform: translate(20px, -40px) rotate(8deg);
+        opacity: 0.7;
+      }
+    }
+
+    .ch1-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 360px;
+    }
+
+    .ch1-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.75rem, 5vw, 2.25rem);
+      font-weight: 600;
+      color: #6b4d5e;
+      line-height: 1.4;
+      min-height: 4em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .ch1-title .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      background: var(--rose-deep);
+      margin-left: 2px;
+      animation: blink 1s step-end infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .btn-begin {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--rose-deep), var(--lavender-deep));
+      color: white;
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.8s 0.3s, transform 0.6s var(--ease-bounce), box-shadow 0.3s;
+    }
+
+    .ch1-content.ready .btn-begin {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .btn-begin:hover, .btn-begin:focus-visible {
+      box-shadow: var(--shadow-glow);
+      transform: scale(1.05);
+    }
+
+    .btn-begin:active {
+      transform: scale(0.98);
+    }
+
+    /* ---------- Chapter 2: The Feeling ---------- */
+    #ch2 {
+      background: linear-gradient(180deg, var(--lavender) 0%, var(--cream) 50%, var(--peach) 100%);
+    }
+
+    .parallax-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 80%, rgba(255, 182, 193, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(228, 197, 247, 0.4) 0%, transparent 50%);
+      will-change: transform;
+    }
+
+    .ch2-text {
+      position: relative;
+      z-index: 1;
+      max-width: 340px;
+      text-align: center;
+    }
+
+    .ch2-text .line {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 4vw, 1.75rem);
+      font-style: italic;
+      color: #5c4a5a;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s var(--ease-soft), transform 0.8s var(--ease-soft);
+    }
+
+    .ch2-text .line.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .ch2-hearts {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .ch2-heart-touch {
+      position: absolute;
+      font-size: 2rem;
+      pointer-events: none;
+      animation: heart-pop 1.2s var(--ease-bounce) forwards;
+    }
+
+    @keyframes heart-pop {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.3);
+      }
+      100% {
+        transform: scale(1);
+        opacity: 0;
+      }
+    }
+
+    .btn-next {
+      margin-top: 2rem;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.85rem 1.75rem;
+      border: none;
+      border-radius: 999px;
+      background: white;
+      color: var(--rose-deep);
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s var(--ease-bounce), box-shadow 0.3s;
+    }
+
+    .btn-next:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-glow);
+    }
+
+    /* ---------- Chapter 3: Playful Love ---------- */
+    #ch3 {
+      background: linear-gradient(180deg, var(--peach) 0%, var(--rose) 50%, var(--lavender) 100%);
+    }
+
+    .ch3-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 4vw, 1.85rem);
+      color: #6b4d5e;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .playground {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .teddy, .heart-btn {
+      font-size: 3rem;
+      cursor: pointer;
+      transition: transform 0.3s var(--ease-bounce);
+      user-select: none;
+    }
+
+    .teddy:hover, .teddy:active,
+    .heart-btn:hover, .heart-btn:active {
+      transform: scale(1.2) rotate(-5deg);
+    }
+
+    .reaction-box {
+      min-height: 80px;
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #6b4d5e;
+      transition: opacity 0.4s;
+    }
+
+    .easter-egg {
+      position: fixed;
+      font-size: 1.25rem;
+      opacity: 0.3;
+      cursor: pointer;
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 10;
+    }
+
+    .easter-egg:hover {
+      opacity: 0.9;
+      transform: scale(1.2);
+    }
+
+    /* ---------- Chapter 4: Mini Love Game ---------- */
+    #ch4 {
+      background: linear-gradient(180deg, var(--lavender) 0%, var(--cream) 100%);
+    }
+
+    .game-container {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-soft);
+      max-width: 320px;
+    }
+
+    .game-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      color: #6b4d5e;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .game-card {
+      aspect-ratio: 1;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      position: relative;
+      transform-style: preserve-3d;
+      perspective: 600px;
+      transition: transform 0.5s var(--ease-soft);
+    }
+
+    .game-card .face {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backface-visibility: hidden;
+      font-size: 1.5rem;
+    }
+
+    .game-card .face-back {
+      background: linear-gradient(135deg, var(--rose), var(--lavender));
+      color: white;
+      font-size: 1.25rem;
+    }
+
+    .game-card .face-front {
+      background: white;
+      transform: rotateY(180deg);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .game-card.flipped, .game-card.matched {
+      transform: rotateY(180deg);
+      cursor: default;
+    }
+
+    .game-message {
+      min-height: 3rem;
+      text-align: center;
+      font-style: italic;
+      color: #6b4d5e;
+      font-size: 0.95rem;
+    }
+
+    .btn-skip-game {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.8);
+      color: var(--lavender-deep);
+      cursor: pointer;
+    }
+
+    /* ---------- Chapter 5: Emotional Build-Up ---------- */
+    #ch5 {
+      background: linear-gradient(180deg, #e8d5e0 0%, #d4c0d8 100%);
+    }
+
+    #ch5.dimmed {
+      background: linear-gradient(180deg, #d8c8d4 0%, #c8b4c8 100%);
+    }
+
+    .ch5-text .line {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.35rem, 4vw, 1.65rem);
+      font-style: italic;
+      color: #5c4a5a;
+      line-height: 1.8;
+      text-align: center;
+      max-width: 320px;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s var(--ease-soft), transform 1s var(--ease-soft);
+    }
+
+    .ch5-text .line.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---------- Chapter 6: The Question ---------- */
+    #ch6 {
+      background: linear-gradient(180deg, #d8c0d0 0%, #c8b0c0 100%);
+    }
+
+    .ch6-question {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 4.5vw, 2rem);
+      font-weight: 600;
+      color: #5c4a5a;
+      text-align: center;
+      max-width: 320px;
+      line-height: 1.5;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 30px rgba(248, 180, 196, 0.6);
+    }
+
+    .ch6-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+      min-height: 120px;
+    }
+
+    .btn-yes {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--rose-deep), #e86b9a);
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(240, 147, 176, 0.6);
+      animation: glow-pulse 2s ease-in-out infinite;
+      transition: transform 0.3s var(--ease-bounce);
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { box-shadow: 0 0 30px rgba(240, 147, 176, 0.6); }
+      50% { box-shadow: 0 0 50px rgba(240, 147, 176, 0.9); }
+    }
+
+    .btn-yes:hover {
+      transform: scale(1.08);
+    }
+
+    .btn-no {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 999px;
+      background: #e0e0e0;
+      color: #888;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.2s, opacity 0.3s;
+    }
+
+    .btn-no.runaway {
+      transition: transform 0.4s var(--ease-soft), opacity 0.3s;
+    }
+
+    .no-message {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1rem;
+      color: #6b4d5e;
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .no-message.show {
+      opacity: 1;
+    }
+
+    /* ---------- Chapter 7: Forever ---------- */
+    #ch7 {
+      background: linear-gradient(180deg, var(--cream) 0%, var(--peach) 50%, var(--rose) 100%);
+      animation: forever-glow 8s ease-in-out infinite;
+    }
+
+    @keyframes forever-glow {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.03); }
+    }
+
+    .forever-letter {
+      max-width: 360px;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      animation: letter-float 6s ease-in-out infinite;
+    }
+
+    @keyframes letter-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .forever-letter .line {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+      color: #5c4a5a;
+      line-height: 1.8;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .forever-letter .sign {
+      text-align: right;
+      margin-top: 1.5rem;
+      font-style: italic;
+      font-size: 1.1rem;
+    }
+
+    /* ---------- Confetti & Celebration ---------- */
+    .confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      top: -20px;
+      border-radius: 2px;
+      animation: confetti-fall 3s var(--ease-soft) forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(120vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    .heart-explosion {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .heart-explosion span {
+      position: absolute;
+      font-size: 2rem;
+      animation: heart-burst 1.5s var(--ease-bounce) forwards;
+    }
+
+    @keyframes heart-burst {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+
+    /* ---------- Audio ---------- */
+    .audio-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.8);
+      color: var(--rose-deep);
+      cursor: pointer;
+      z-index: 50;
+      box-shadow: var(--shadow-soft);
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s;
+    }
+
+    .audio-toggle:hover {
+      transform: scale(1.1);
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- SCREEN 1 -->
-<div class="screen active" id="s1">
-    <div class="box">
-        <h2>Hey Muffin 💕</h2>
-        <p>I made something just for you…</p>
-        <button onclick="next(2)">Start ❤️</button>
+  <button class="audio-toggle" id="audioToggle" aria-label="Toggle music">🎵</button>
+
+  <!-- Optional: add your own music.mp3 in the same folder and uncomment the source -->
+  <audio id="bgMusic" loop>
+    <!-- <source src="music.mp3" type="audio/mpeg"> -->
+  </audio>
+
+  <!-- ========== CHAPTER 1: The Beginning ========== -->
+  <section class="chapter active" id="ch1">
+    <div class="particles" id="particles"></div>
+    <div class="ch1-content" id="ch1Content">
+      <div class="ch1-title" id="ch1Title"><span class="cursor"></span></div>
+      <button class="btn-begin" id="btnBegin">Begin our story</button>
     </div>
-</div>
+  </section>
 
-<!-- SCREEN 2 -->
-<div class="screen" id="s2">
-    <div class="box">
-        <h2 id="typing"></h2>
-        <button onclick="next(3)">Continue 💗</button>
+  <!-- ========== CHAPTER 2: The Feeling ========== -->
+  <section class="chapter hidden" id="ch2">
+    <div class="parallax-bg" id="parallaxBg"></div>
+    <div class="ch2-hearts" id="ch2Hearts"></div>
+    <div class="ch2-text">
+      <p class="line" data-delay="0">Some people change your life quietly…</p>
+      <p class="line" data-delay="400">and you don't realize it until everything feels different.</p>
+      <button class="btn-next" id="btnCh2">Continue</button>
     </div>
-</div>
+  </section>
 
-<!-- SCREEN 3 -->
-<div class="screen" id="s3">
-    <div class="box">
-        <h2>Tap anywhere 💖</h2>
-        <p>Create some love magic ✨</p>
-        <button onclick="next(4)">Next 💕</button>
+  <!-- ========== CHAPTER 3: Playful Love ========== -->
+  <section class="chapter hidden" id="ch3">
+    <h2 class="ch3-title">Play with me 💕</h2>
+    <div class="playground">
+      <span class="teddy" id="teddy1" role="button" aria-label="Teddy">🧸</span>
+      <span class="heart-btn" id="heartBtn1" role="button" aria-label="Heart">❤️</span>
+      <span class="teddy" id="teddy2" role="button" aria-label="Teddy">🐻</span>
+      <span class="heart-btn" id="heartBtn2" role="button" aria-label="Heart">💖</span>
     </div>
-</div>
+    <div class="reaction-box" id="ch3Reaction"></div>
+    <button class="btn-next" id="btnCh3">Next</button>
+    <div class="easter-egg" id="egg1" style="top:15%;left:8%;">🌸</div>
+    <div class="easter-egg" id="egg2" style="top:80%;right:10%;">✨</div>
+    <div class="easter-egg" id="egg3" style="bottom:25%;left:5%;">🦋</div>
+  </section>
 
-<!-- SCREEN 4 -->
-<div class="screen" id="s4">
-    <div class="box">
-        <h2>One important question… 💍</h2>
-        <p>Will you be the mother of my children?</p>
-        <div style="height:150px; position:relative;">
-            <button onclick="yes()">YES 💖</button>
-            <button id="noBtn">NO 😅</button>
-        </div>
+  <!-- ========== CHAPTER 4: Mini Love Game ========== -->
+  <section class="chapter hidden" id="ch4">
+    <div class="game-container">
+      <h3 class="game-title">Match the hearts 💕</h3>
+      <div class="game-grid" id="gameGrid"></div>
+      <div class="game-message" id="gameMessage">Find all the pairs!</div>
+      <div style="text-align:center;">
+        <button class="btn-skip-game" id="btnSkipGame">Skip (I already know we're a match)</button>
+      </div>
     </div>
-</div>
+  </section>
 
-<!-- SCREEN 5 -->
-<div class="screen" id="s5">
-    <div class="box">
-        <h2>My Muffin ❤️</h2>
-        <p>
-        You are my today,<br>
-        my tomorrow,<br>
-        and my forever.<br><br>
-        Thank you for choosing me 💕
-        </p>
+  <!-- ========== CHAPTER 5: Emotional Build-Up ========== -->
+  <section class="chapter hidden" id="ch5">
+    <div class="ch5-text">
+      <p class="line" data-delay="0">I thought about the future…</p>
+      <p class="line" data-delay="800">and somehow you were always there.</p>
     </div>
-</div>
+  </section>
 
-<script>
-let text = "Every moment with you feels like magic ✨";
-let i = 0;
+  <!-- ========== CHAPTER 6: The Question ========== -->
+  <section class="chapter hidden" id="ch6">
+    <p class="ch6-question">Will you be the mother of my children?</p>
+    <div class="ch6-buttons">
+      <button class="btn-yes" id="btnYes">Yes 💖</button>
+      <button class="btn-no" id="btnNo">No 😅</button>
+    </div>
+    <div class="no-message" id="noMessage"></div>
+  </section>
 
-function next(n){
-    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-    document.getElementById('s'+n).classList.add('active');
+  <!-- ========== CHAPTER 7: Forever ========== -->
+  <section class="chapter hidden" id="ch7">
+    <div class="forever-letter">
+      <p class="line">This wasn't just a question.</p>
+      <p class="line">It was a promise.</p>
+      <p class="line">A future.</p>
+      <p class="line">A forever I want only with you ❤️</p>
+      <p class="sign">— With love, always</p>
+    </div>
+  </section>
 
-    if(n===2){
-        const el = document.getElementById("typing");
-        el.innerHTML = "";
-        i=0;
-        let t = setInterval(()=>{
-            el.innerHTML += text[i];
+  <div class="confetti" id="confetti"></div>
+  <div class="heart-explosion" id="heartExplosion"></div>
+
+  <script>
+    (function() {
+      'use strict';
+
+      const PARTICLE_SYMBOLS = ['❤️', '💕', '✨', '💖', '⭐'];
+      const CH1_TEXT = "Hey Muffin… I made this just for you ❤️";
+      const NO_MESSAGES = [
+        "Hey… wait 😅",
+        "That's not fair 😭",
+        "My heart can't handle this 💔",
+        "Okay okay come back! 🥺",
+        "Please? 🙏",
+        "I made you a whole website! 😩",
+        "Fine, I'll wait here… 💕"
+      ];
+      const EMOJI_PAIRS = ['❤️', '💕', '💖', '🌸', '✨', '🦋', '🧸', '💗'];
+      const GAME_MESSAGES = [
+        "You're so good at this!",
+        "We're a perfect match 💕",
+        "My heart is yours!",
+        "One more pair!",
+        "Almost there!",
+        "You found them all! Forever together 💖"
+      ];
+
+      let currentChapter = 1;
+      let noClickCount = 0;
+      let gameMatches = 0;
+      let gameFlipped = [];
+
+      // ---------- Audio ----------
+      const bgMusic = document.getElementById('bgMusic');
+      const audioToggle = document.getElementById('audioToggle');
+      if (bgMusic.src || bgMusic.querySelector('source')) {
+        audioToggle.style.display = 'flex';
+      } else {
+        audioToggle.style.display = 'none';
+      }
+      audioToggle.addEventListener('click', function() {
+        if (bgMusic.paused) {
+          bgMusic.play().catch(() => {});
+          audioToggle.textContent = '🔇';
+        } else {
+          bgMusic.pause();
+          audioToggle.textContent = '🎵';
+        }
+      });
+
+      function playTapSound() {
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.frequency.value = 523;
+          osc.type = 'sine';
+          gain.gain.setValueAtTime(0.1, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+          osc.start(ctx.currentTime);
+          osc.stop(ctx.currentTime + 0.15);
+        } catch (_) {}
+      }
+
+      // ---------- Particles (Ch1) ----------
+      function createParticles() {
+        const container = document.getElementById('particles');
+        for (let i = 0; i < 18; i++) {
+          const p = document.createElement('span');
+          p.className = 'particle';
+          p.textContent = PARTICLE_SYMBOLS[Math.floor(Math.random() * PARTICLE_SYMBOLS.length)];
+          p.style.left = Math.random() * 100 + '%';
+          p.style.top = Math.random() * 100 + '%';
+          p.style.animationDelay = Math.random() * 4 + 's';
+          p.style.animationDuration = (6 + Math.random() * 4) + 's';
+          container.appendChild(p);
+        }
+      }
+      createParticles();
+
+      // ---------- Typing (Ch1) ----------
+      function typeWriter(el, text, speed, onDone) {
+        el.innerHTML = '';
+        let i = 0;
+        const cursor = document.createElement('span');
+        cursor.className = 'cursor';
+        el.appendChild(cursor);
+        function tick() {
+          if (i < text.length) {
+            const before = document.createTextNode(text.slice(0, i));
+            el.innerHTML = '';
+            el.appendChild(before);
+            el.appendChild(cursor);
             i++;
-            if(i>=text.length) clearInterval(t);
-        },60);
-    }
-}
+            setTimeout(tick, speed);
+          } else {
+            el.innerHTML = text + ' ';
+            el.appendChild(cursor);
+            if (onDone) setTimeout(onDone, 400);
+          }
+        }
+        tick();
+      }
 
-document.addEventListener("click", e=>{
-    let h=document.createElement("div");
-    h.className="heart";
-    h.style.left=e.clientX+"px";
-    h.style.top=e.clientY+"px";
-    h.innerHTML="❤️";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),2000);
-});
+      const ch1Content = document.getElementById('ch1Content');
+      const ch1Title = document.getElementById('ch1Title');
+      const btnBegin = document.getElementById('btnBegin');
 
-const noBtn=document.getElementById("noBtn");
-noBtn.addEventListener("mouseenter", move);
-noBtn.addEventListener("touchstart", e=>{
-    e.preventDefault();
-    move();
-});
+      typeWriter(ch1Title, CH1_TEXT, 70, function() {
+        ch1Content.classList.add('ready');
+      });
 
-function move(){
-    const x=Math.random()*200;
-    const y=Math.random()*100;
-    noBtn.style.left=x+"px";
-    noBtn.style.top=y+"px";
-}
+      btnBegin.addEventListener('click', function() {
+        playTapSound();
+        goToChapter(2);
+      });
 
-function yes(){
-    next(5);
-}
-</script>
+      // ---------- Chapter navigation ----------
+      function goToChapter(num) {
+        document.querySelectorAll('.chapter').forEach(ch => {
+          ch.classList.remove('active');
+          ch.classList.add('hidden');
+        });
+        const next = document.getElementById('ch' + num);
+        if (next) {
+          next.classList.remove('hidden');
+          next.classList.add('active');
+          currentChapter = num;
+          onChapterEnter(num);
+        }
+      }
 
+      function onChapterEnter(num) {
+        if (num === 2) {
+          const lines = document.querySelectorAll('#ch2 .line');
+          const delays = Array.from(lines).map(l => parseInt(l.dataset.delay || 0, 10));
+          lines.forEach((line, i) => {
+            setTimeout(() => line.classList.add('visible'), 300 + delays[i]);
+          });
+          // Parallax
+          const bg = document.getElementById('parallaxBg');
+          document.addEventListener('mousemove', function parallax(e) {
+            if (currentChapter !== 2 || !bg) return;
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            bg.style.transform = `translate(${x}px, ${y}px)`;
+          });
+        }
+        if (num === 3) {
+          initCh3();
+        }
+        if (num === 4) {
+          initGame();
+        }
+        if (num === 5) {
+          document.getElementById('ch5').classList.add('dimmed');
+          const lines = document.querySelectorAll('#ch5 .line');
+          lines.forEach((line, i) => {
+            setTimeout(() => line.classList.add('visible'), 400 + i * 1200);
+          });
+          setTimeout(() => goToChapter(6), 400 + lines.length * 1200 + 1500);
+        }
+      }
+
+      // ---------- Ch2: touch hearts ----------
+      const ch2Hearts = document.getElementById('ch2Hearts');
+      document.getElementById('ch2').addEventListener('click', function(e) {
+        if (currentChapter !== 2 || e.target.closest('button')) return;
+        const heart = document.createElement('span');
+        heart.className = 'ch2-heart-touch';
+        heart.textContent = ['❤️', '💕', '💖'][Math.floor(Math.random() * 3)];
+        heart.style.left = e.clientX + 'px';
+        heart.style.top = e.clientY + 'px';
+        ch2Hearts.appendChild(heart);
+        playTapSound();
+        setTimeout(() => heart.remove(), 1200);
+      });
+
+      document.getElementById('btnCh2').addEventListener('click', function() {
+        playTapSound();
+        goToChapter(3);
+      });
+
+      // ---------- Ch3: playful ----------
+      const ch3Reaction = document.getElementById('ch3Reaction');
+      const teddyReactions = [
+        "That tickles! 🧸",
+        "Best bear hug ever!",
+        "You found my soft spot 💕",
+        "Okay okay, I love you too! 😂"
+      ];
+      const heartReactions = [
+        "You're making my heart race! 💓",
+        "More! More!",
+        "So many hearts for you! 💖",
+        "My heart is yours 💕"
+      ];
+
+      function initCh3() {
+        let teddyClicks = 0, heartClicks = 0;
+        function setReaction(text) {
+          ch3Reaction.textContent = text;
+          ch3Reaction.style.opacity = '1';
+        }
+        document.getElementById('teddy1').onclick = () => setReaction(teddyReactions[teddyClicks++ % teddyReactions.length]);
+        document.getElementById('teddy2').onclick = () => setReaction(teddyReactions[teddyClicks++ % teddyReactions.length]);
+        document.getElementById('heartBtn1').onclick = () => setReaction(heartReactions[heartClicks++ % heartReactions.length]);
+        document.getElementById('heartBtn2').onclick = () => setReaction(heartReactions[heartClicks++ % heartReactions.length]);
+        document.querySelectorAll('.easter-egg').forEach(egg => {
+          egg.onclick = function() {
+            setReaction("You found a little secret! 💫");
+            this.style.opacity = '0';
+          };
+        });
+      }
+
+      document.getElementById('btnCh3').addEventListener('click', function() {
+        playTapSound();
+        goToChapter(4);
+      });
+
+      // ---------- Ch4: Match game ----------
+      const gameGrid = document.getElementById('gameGrid');
+      const gameMessage = document.getElementById('gameMessage');
+
+      function initGame() {
+        gameMatches = 0;
+        gameFlipped = [];
+        gameGrid.innerHTML = '';
+        const emojis = [...EMOJI_PAIRS, ...EMOJI_PAIRS];
+        for (let i = emojis.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [emojis[i], emojis[j]] = [emojis[j], emojis[i]];
+        }
+        emojis.forEach((emoji, index) => {
+          const card = document.createElement('div');
+          card.className = 'game-card';
+          card.dataset.index = index;
+          card.dataset.emoji = emoji;
+          card.innerHTML = '<span class="face face-back">?</span><span class="face face-front">' + emoji + '</span>';
+          card.addEventListener('click', handleCardClick);
+          gameGrid.appendChild(card);
+        });
+        gameMessage.textContent = 'Find all the pairs!';
+      }
+
+      function handleCardClick(e) {
+        const card = e.currentTarget;
+        if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
+        if (gameFlipped.length === 2) return;
+        card.classList.add('flipped');
+        gameFlipped.push(card);
+        playTapSound();
+        if (gameFlipped.length === 2) {
+          const [a, b] = gameFlipped;
+          if (a.dataset.emoji === b.dataset.emoji) {
+            a.classList.add('matched');
+            b.classList.add('matched');
+            gameMatches++;
+            gameMessage.textContent = GAME_MESSAGES[Math.min(gameMatches - 1, GAME_MESSAGES.length - 1)];
+            if (gameMatches === EMOJI_PAIRS.length) {
+              setTimeout(() => {
+                gameMessage.textContent = "You found them all! Forever together 💖";
+                setTimeout(() => {
+                  playTapSound();
+                  goToChapter(5);
+                }, 1800);
+              }, 500);
+            }
+            gameFlipped = [];
+          } else {
+            setTimeout(() => {
+              a.classList.remove('flipped');
+              b.classList.remove('flipped');
+              gameFlipped = [];
+            }, 700);
+          }
+        }
+      }
+
+      document.getElementById('btnSkipGame').addEventListener('click', function() {
+        playTapSound();
+        goToChapter(5);
+      });
+
+      // ---------- Ch6: The Question ----------
+      const btnYes = document.getElementById('btnYes');
+      const btnNo = document.getElementById('btnNo');
+      const noMessage = document.getElementById('noMessage');
+
+      btnNo.addEventListener('mouseenter', moveNo);
+      btnNo.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        moveNo();
+      });
+      btnNo.addEventListener('click', function(e) {
+        e.preventDefault();
+        showNoMessage();
+      });
+
+      function moveNo() {
+        btnNo.classList.add('runaway');
+        const rect = btnNo.getBoundingClientRect();
+        const margin = 24;
+        const maxX = Math.max(0, window.innerWidth - rect.width - margin);
+        const maxY = Math.max(0, window.innerHeight - rect.height - margin);
+        let x = margin + Math.random() * Math.max(0, maxX - margin);
+        let y = margin + Math.random() * Math.max(0, maxY - margin);
+        x = Math.min(Math.max(x, margin), window.innerWidth - rect.width - margin);
+        y = Math.min(Math.max(y, margin), window.innerHeight - rect.height - margin);
+        btnNo.style.position = 'fixed';
+        btnNo.style.left = x + 'px';
+        btnNo.style.top = y + 'px';
+        btnNo.style.right = 'auto';
+        btnNo.style.transform = 'scale(0.95)';
+      }
+
+      function showNoMessage() {
+        noClickCount++;
+        const msg = NO_MESSAGES[Math.min(noClickCount - 1, NO_MESSAGES.length - 1)];
+        noMessage.textContent = msg;
+        noMessage.classList.add('show');
+        setTimeout(() => noMessage.classList.remove('show'), 2000);
+        if (noClickCount >= 5) {
+          btnNo.style.opacity = '0.5';
+          btnNo.style.transform = 'scale(0.8)';
+        }
+        if (noClickCount >= 7) {
+          btnNo.style.transition = 'opacity 0.5s';
+          btnNo.style.opacity = '0';
+          setTimeout(() => {
+            btnNo.style.display = 'none';
+          }, 500);
+        }
+      }
+
+      btnYes.addEventListener('click', function() {
+        playTapSound();
+        celebrate();
+      });
+
+      function celebrate() {
+        const colors = ['#f8b4c4', '#e4c5f7', '#ffd9c9', '#f093b0', '#d4a5f0'];
+        const confettiEl = document.getElementById('confetti');
+        for (let i = 0; i < 80; i++) {
+          const piece = document.createElement('div');
+          piece.className = 'confetti-piece';
+          piece.style.left = Math.random() * 100 + '%';
+          piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+          piece.style.animationDelay = Math.random() * 0.5 + 's';
+          piece.style.animationDuration = (2.5 + Math.random() * 1.5) + 's';
+          confettiEl.appendChild(piece);
+        }
+        const explosion = document.getElementById('heartExplosion');
+        const hearts = ['❤️', '💕', '💖', '💗', '💓'];
+        for (let i = 0; i < 12; i++) {
+          const s = document.createElement('span');
+          s.textContent = hearts[i % hearts.length];
+          s.style.setProperty('--angle', (i * 30) + 'deg');
+          const angle = (i / 12) * Math.PI * 2;
+          const dist = 80 + Math.random() * 40;
+          s.style.animationDelay = (i * 0.05) + 's';
+          s.style.left = 50 + Math.cos(angle) * dist + '%';
+          s.style.top = 50 + Math.sin(angle) * dist + '%';
+          explosion.appendChild(s);
+        }
+        setTimeout(() => {
+          confettiEl.innerHTML = '';
+          explosion.innerHTML = '';
+          goToChapter(7);
+        }, 2800);
+      }
+    })();
+  </script>
 </body>
 </html>
